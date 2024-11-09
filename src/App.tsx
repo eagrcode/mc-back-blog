@@ -1,9 +1,13 @@
+import { useState } from "react";
 import { useLogin } from "./lib/login";
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const login = useLogin();
 
   const submitForm = async (e: React.FormEvent<HTMLFormElement>) => {
+    setIsLoading((prev) => !prev);
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -22,10 +26,29 @@ export default function App() {
   };
 
   return (
-    <form onSubmit={submitForm}>
-      <input type="text" name="email" placeholder="Email" />
-      <input type="password" name="password" placeholder="Password" />
-      <button type="submit">Login</button>
-    </form>
+    <div className="flex w-full min-h-full justify-center items-center">
+      <form
+        onSubmit={submitForm}
+        className="flex flex-col gap-4 text-base w-60"
+      >
+        <input
+          className="border-2 border-black p-1"
+          type="text"
+          name="email"
+          placeholder="Email"
+          disabled={isLoading}
+        />
+        <input
+          className="border-2 border-black p-1"
+          type="password"
+          name="password"
+          placeholder="Password"
+          disabled={isLoading}
+        />
+        <button className="border-2 border-black p-1" type="submit">
+          {isLoading ? "Loading..." : "Login"}
+        </button>
+      </form>
+    </div>
   );
 }

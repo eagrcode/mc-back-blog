@@ -18,6 +18,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <main className="flex min-h-dvh">
+      <RouterProvider router={router} />
+    </main>
   </StrictMode>
 );
