@@ -25,6 +25,10 @@ const router = createBrowserRouter([
         element: <BlogList />,
       },
       {
+        path: "/dashboard/blog/:id",
+        element: <p>Blog ID</p>,
+      },
+      {
         path: "/dashboard/pages",
         element: <>Edit Pages</>,
       },
