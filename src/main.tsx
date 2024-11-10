@@ -4,6 +4,8 @@ import "./index.css";
 import App from "./App.tsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./Dashboard.tsx";
+import Overview from "./Overview.tsx";
+import BlogList from "./BlogList.tsx";
 
 const router = createBrowserRouter([
   {
@@ -13,13 +15,25 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    children: [
+      {
+        index: true,
+        element: <Overview />,
+      },
+      {
+        path: "/dashboard/blog",
+        element: <BlogList />,
+      },
+      {
+        path: "/dashboard/pages",
+        element: <>Edit Pages</>,
+      },
+    ],
   },
 ]);
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <main className="flex min-h-dvh">
-      <RouterProvider router={router} />
-    </main>
+    <RouterProvider router={router} />
   </StrictMode>
 );
