@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBlogPosts } from "./lib/getBlogPosts";
+import { getBlogPosts } from "../lib/getBlogPosts";
 
 type Category = {
   category: string;
