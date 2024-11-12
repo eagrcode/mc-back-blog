@@ -34,7 +34,7 @@ export default function Overview() {
   }
 
   return (
-    <div className="flex flex-col gap-4 w-full p-4 items-center justify-center border-2 border-gray-800 rounded-lg">
+    <div className="flex flex-col gap-4 h-fit w-full p-4 items-center justify-center border-2 border-gray-800 rounded-lg">
       <h2 className="text-2xl font-semibold text-gray-300">
         {`Welcome, ${user?.email}`}
       </h2>
