@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Dashboard from "./Dashboard.tsx";
 import Overview from "./components/Overview.tsx";
 import BlogList from "./components/BlogList.tsx";
+import BlogPost from "./components/BlogPost.tsx";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/blog/:id",
-        element: <p>Blog ID</p>,
+        element: <BlogPost />,
       },
       {
         path: "/dashboard/pages",
