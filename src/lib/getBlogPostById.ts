@@ -8,7 +8,7 @@ type BlogPostProps = {
   id: number;
   title: string;
   summary: string;
-  content: string[];
+  content: string;
   created_at: Date;
   image_url: string;
   published: boolean;
@@ -19,18 +19,19 @@ type BlogPostProps = {
 
 export const getBlogPostById = async (
   id: string | undefined
-): Promise<BlogPostProps> => {
+): Promise<BlogPostProps | null> => {
   try {
     const { data, error: dbError } = await supabase
       .from("posts")
       .select("*, categories(category)")
-      .eq("id", id);
+      .eq("id", id)
+      .single();
 
     if (dbError) {
       throw dbError;
     }
-    console.log(data[0]);
-    return data[0];
+    console.log(data);
+    return data as BlogPostProps;
   } catch (error: any) {
     throw new Error(error.message);
   }
