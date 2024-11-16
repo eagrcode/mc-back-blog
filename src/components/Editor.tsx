@@ -89,11 +89,12 @@ export default function RichTextEditor({
         name="category"
         id="category-select"
         onChange={(e) => setCategoryId(parseInt(e.target.value))}
+        value={categoryId}
       >
         <option value="">--Select category--</option>
 
         {categories.map((c) => (
-          <option key={c.id} value={c.id} selected={c.id == currentCategoryId}>
+          <option key={c.id} value={c.id}>
             {c.category}
           </option>
         ))}
