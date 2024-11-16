@@ -1,15 +1,18 @@
 import { NavLink } from "react-router-dom";
 
 export default function DashboardSideNav() {
+  const baseStyles = "p-4 rounded-lg"; // Define default styles here
+  const activeStyles = "bg-slate-300 text-neutral-950"; // Define active styles
+  const nonActiveStyles =
+    "hover:bg-slate-300 hover:text-neutral-950 text-neutral-950/70";
+
   return (
     <nav className="flex flex-col text-xl gap-4">
       <NavLink
         to={"/dashboard"}
         end
         className={({ isActive }) =>
-          isActive
-            ? "p-4 rounded-lg text-gray-300 bg-gray-900"
-            : "p-4 hover:bg-gray-900 rounded-lg"
+          `${baseStyles} ${isActive ? activeStyles : nonActiveStyles}`
         }
       >
         Dashboard
@@ -17,9 +20,7 @@ export default function DashboardSideNav() {
       <NavLink
         to={"/dashboard/blog"}
         className={({ isActive }) =>
-          isActive
-            ? "p-4 rounded-lg text-gray-300 bg-gray-900"
-            : "p-4 hover:bg-gray-900 rounded-lg"
+          `${baseStyles} ${isActive ? activeStyles : nonActiveStyles}`
         }
       >
         Blog
@@ -27,9 +28,7 @@ export default function DashboardSideNav() {
       <NavLink
         to={"/dashboard/pages"}
         className={({ isActive }) =>
-          isActive
-            ? "p-4 rounded-lg text-gray-300 bg-gray-900"
-            : "p-4 hover:bg-gray-900 rounded-lg"
+          `${baseStyles} ${isActive ? activeStyles : nonActiveStyles}`
         }
       >
         Pages
