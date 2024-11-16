@@ -99,12 +99,20 @@ export default function RichTextEditor({
           </option>
         ))}
       </select>
-      <button
-        type="submit"
-        className="p-2 cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:bg-slate-400 hover:border-slate-400 font-semibold"
-      >
-        Update
-      </button>
+      <div className="flex gap-2">
+        <button
+          type="submit"
+          className="p-2 cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:bg-slate-400 hover:border-slate-400 font-semibold"
+        >
+          Update
+        </button>
+        <button
+          onClick={() => setIsEditMode(false)}
+          className="p-2 cursor-pointer z-10 self-start border-2 text-red-600 border-red-600 rounded-md hover:bg-red-700 hover:border-red-700 hover:text-slate-300 font-semibold"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   );
 }
