@@ -1,35 +1,31 @@
 import { supabase } from "./supabaseClient";
 
-// type Category = {
-//   category: string;
-// };
-
-// type BlogPostProps = {
-//   id: number;
-//   title: string;
-//   summary: string;
-//   content: string[];
-//   created_at: Date;
-//   image_url: string;
-//   published: boolean;
-//   category_id: number;
-//   categories: Category;
-//   tags: string[];
-// };
-
-export const updateBlogPost = async (id: string, content: string) => {
+export const updateBlogPost = async (
+  id: string,
+  title: string,
+  summary: string,
+  content: string,
+  updatedAt: string,
+  categoryId: number
+): Promise<any> => {
   try {
     const { data, error: dbError } = await supabase
       .from("posts")
-      .update({ title: "Title", content: content })
+      .update({
+        title: title,
+        summary: summary,
+        content: content,
+        updated_at: updatedAt,
+        category_id: categoryId,
+      })
       .eq("id", id);
 
     if (dbError) {
       throw dbError;
     }
-    console.log(data);
+    console.log("Successfully updated");
     return data;
   } catch (error: any) {
-    throw new Error(error.message);
+    throw error.message;
   }
 };
