@@ -11,7 +11,7 @@ type BlogPostProps = {
   id: number;
   title: string;
   summary: string;
-  content: string[];
+  content: string;
   created_at: Date;
   image_url: string;
   published: boolean;
@@ -21,23 +21,44 @@ type BlogPostProps = {
 };
 
 export default function BlogPost() {
-  const { id } = useParams();
-
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [blogPost, setBlogPost] = useState<BlogPostProps>();
+  const [blogPost, setBlogPost] = useState<BlogPostProps | null>(null);
+
+  const { id } = useParams<{ id: string }>();
+
+  let blogId = "";
+
+  if (id) {
+    blogId += id;
+  }
 
   useEffect(() => {
     const fetchBlogPosts = async () => {
       const res = await getBlogPostById(id);
       setBlogPost(res);
+      setIsLoading(false);
     };
     fetchBlogPosts();
-  }, []);
+  }, [id, isEditMode, setIsLoading]);
+
+  const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <>
       {isEditMode ? (
-        <RichTextEditor id={id} />
+        <RichTextEditor
+          id={blogId}
+          currentTitle={blogPost?.title || ""}
+          currentSummary={blogPost?.summary || ""}
+          currentContent={blogPost?.content || ""}
+          currentCategoryId={blogPost?.category_id || 0}
+          setIsEditMode={setIsEditMode}
+        />
       ) : (
         <div className="flex flex-col w-full h-fit p-4 gap-2 border-2 border-gray-800 rounded-lg">
           <div className="flex justify-between">
@@ -47,31 +68,11 @@ export default function BlogPost() {
             >
               Edit
             </button>
-            {isEditMode && (
-              <div className="flex gap-4">
-                <button onClick={() => setIsEditMode(false)}>Cancel</button>
-                <button>Save</button>
-              </div>
-            )}
           </div>
+          <p>{formatDate(blogPost?.created_at || new Date())}</p>
           <h1 className="text-2xl">{blogPost?.title}</h1>
           <p>{blogPost?.summary}</p>
-          {/* {blogPost?.content.map((p, index) => (
-            <div key={index}>
-              {isEditMode ? (
-                <textarea
-                  value={p}
-                  className="w-full border-2 border-gray-800 rounded-lg p-2 bg-inherit"
-                />
-              ) : (
-                <p>{p}</p>
-              )}
-            </div>
-          ))} */}
-          <p>{blogPost?.content}</p>
-          {blogPost?.tags.map((t) => (
-            <p>{t}</p>
-          ))}
+          <div dangerouslySetInnerHTML={{ __html: blogPost?.content || "" }} />
         </div>
       )}
     </>
