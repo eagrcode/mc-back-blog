@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getBlogPostById } from "../lib/getBlogPostById";
 import { updatePrivacy } from "../lib/updatePrivacy";
 import RichTextEditor from "./Editor";
@@ -28,6 +28,9 @@ export default function BlogPost() {
   const [isPublished, setIsPublished] = useState<boolean>(false);
 
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+
+  const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
   let blogId = "";
 
@@ -44,8 +47,6 @@ export default function BlogPost() {
     };
     fetchBlogPosts();
   }, [id, isEditMode, setIsLoading, setIsPublished]);
-
-  const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
   const handleUpdatePrivacy = async (
     e: React.ChangeEvent<HTMLSelectElement>
@@ -72,41 +73,48 @@ export default function BlogPost() {
           setIsEditMode={setIsEditMode}
         />
       ) : (
-        <div className="flex flex-col w-full h-fit bg-transparent border-2 border-slate-300 p-4 gap-4 rounded-md outline-none">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <div
-                className={`${
-                  isPublished ? "bg-green-600" : "bg-red-600"
-                } rounded-full w-4 h-4`}
-              ></div>
-              <p>{formatDate(blogPost?.created_at || new Date())}</p>
-            </div>
-            <div className="flex gap-4">
-              <select
-                className="bg-transparent border-2 border-slate-300 p-2 rounded-md"
-                name="privacy"
-                id="privacy-select"
-                onChange={handleUpdatePrivacy}
-                value={isPublished ? "true" : "false"}
-              >
-                <option value="">Update privacy</option>
+        <div>
+          <button className="mb-2" onClick={() => navigate(-1)}>
+            {"< Back to posts"}
+          </button>
+          <div className="flex flex-col w-full max-w-4xl h-fit bg-transparent border-2 border-slate-300 p-4 gap-4 rounded-md outline-none">
+            <div className="flex justify-between items-center">
+              <div className="flex items-center gap-2">
+                <div
+                  className={`${
+                    isPublished ? "bg-green-600" : "bg-red-600"
+                  } rounded-full w-4 h-4`}
+                ></div>
+                <p>{formatDate(blogPost?.created_at || new Date())}</p>
+              </div>
+              <div className="flex gap-4">
+                <select
+                  className="bg-transparent border-2 border-slate-300 p-2 rounded-md"
+                  name="privacy"
+                  id="privacy-select"
+                  onChange={handleUpdatePrivacy}
+                  value={isPublished ? "true" : "false"}
+                >
+                  <option value="">Update privacy</option>
 
-                <option value="true">Public</option>
-                <option value="false">Private</option>
-              </select>
+                  <option value="true">Public</option>
+                  <option value="false">Private</option>
+                </select>
 
-              <button
-                onClick={() => setIsEditMode(true)}
-                className="px-4 py-2 cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:bg-slate-400 hover:border-slate-400 font-semibold"
-              >
-                Edit
-              </button>
+                <button
+                  onClick={() => setIsEditMode(true)}
+                  className="px-4 py-2 cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:bg-slate-400 hover:border-slate-400 font-semibold"
+                >
+                  Edit
+                </button>
+              </div>
             </div>
+            <h1 className="text-2xl">{blogPost?.title}</h1>
+            <p>{blogPost?.summary}</p>
+            <div
+              dangerouslySetInnerHTML={{ __html: blogPost?.content || "" }}
+            />
           </div>
-          <h1 className="text-2xl">{blogPost?.title}</h1>
-          <p>{blogPost?.summary}</p>
-          <div dangerouslySetInnerHTML={{ __html: blogPost?.content || "" }} />
         </div>
       )}
     </>

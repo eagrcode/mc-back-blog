@@ -1,11 +1,11 @@
 /* Customize the toolbar */
 
 .quill {
-  @apply w-full border-none outline-none;
+  @apply flex flex-col w-full border-slate-300;
 }
 
 .ql-toolbar {
-  @apply rounded-t-lg p-2;
+  @apply rounded-t-md p-2;
 }
 
 /* General styles for all buttons */
@@ -31,7 +31,7 @@
 
 /* Customize the editor container */
 .ql-container {
-  @apply rounded-b-lg min-h-[200px] max-w-full flex-grow p-4;
+  @apply rounded-b-md min-h-[200px] max-w-full flex-grow p-4;
 }
 
 .ql-editor {

@@ -62,7 +62,10 @@ export default function RichTextEditor({
   };
 
   return (
-    <form onSubmit={handleEditSubmit} className="flex flex-col gap-2 w-full">
+    <form
+      onSubmit={handleEditSubmit}
+      className="flex flex-col gap-2 w-full max-w-4xl"
+    >
       <input
         type="text"
         placeholder="Title"
