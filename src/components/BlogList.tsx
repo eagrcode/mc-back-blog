@@ -32,6 +32,12 @@ export default function BlogList() {
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-[600px]">
+      <Link
+        className="bg-slate-900 w-fit text-slate-200 px-2 py-[2px] rounded-md hover:text-slate-50"
+        to={"/dashboard/create"}
+      >
+        Create Post
+      </Link>
       {blogPosts.map((post) => (
         <article role="article" aria-labelledby={`post-title-${post.id}`}>
           <Link
