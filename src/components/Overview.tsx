@@ -46,7 +46,9 @@ export default function Overview() {
   return (
     <div className="flex flex-col gap-4 h-fit w-full max-w-2xl p-4 items-center justify-center border-2 border-slate-300 rounded-md">
       <h2 className="text-2xl font-semibold">{`Welcome, ${user?.email}`}</h2>
-      <p>{`You currently have ${blogPostsCount} Blog Posts`}</p>
+      <p>{`You currently have ${blogPostsCount} blog post${
+        blogPostsCount > 1 || blogPostsCount < 1 ? "s" : ""
+      }`}</p>
       <p>
         Last update completed at{" "}
         {latestUpdateDate == null ? "never" : formatDate(latestUpdateDate)}

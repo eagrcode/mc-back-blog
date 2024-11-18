@@ -36,7 +36,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard/pages",
-        element: <>Edit Pages</>,
+        element: <>Coming soon...</>,
       },
     ],
   },
