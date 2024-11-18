@@ -5,7 +5,7 @@ export const updatePrivacy = async (
   isPublished: boolean
 ): Promise<number> => {
   try {
-    const { data, error, count } = await supabase
+    const { data, error } = await supabase
       .from("posts")
       .update({ published: isPublished })
       .eq("id", id)

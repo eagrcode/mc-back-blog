@@ -11,7 +11,3 @@
 body {
   @apply bg-slate-200;
 }
-
-main {
-  /* @apply py-12; */
-}
