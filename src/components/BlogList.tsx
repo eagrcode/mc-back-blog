@@ -15,6 +15,7 @@ type BlogListProps = {
   published: boolean;
   category_id: number;
   categories: Category;
+  updated_at: Date;
 };
 
 export default function BlogList() {
@@ -61,7 +62,12 @@ export default function BlogList() {
               <div className="flex items-center gap-2 text-xs">
                 <p>{post.categories.category}</p>
                 {" | "}
-                <p>last updated never</p>
+                <p>
+                  last updated{" "}
+                  {post.updated_at == null
+                    ? "never"
+                    : formatDate(post.updated_at)}
+                </p>
                 {" | "}
                 <p
                   className={post.published ? "text-green-400" : "text-red-600"}
