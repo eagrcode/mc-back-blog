@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import "../Editor.css";
+import "../assets/styles/index.css";
 import { updateBlogPost } from "../lib/updateBlogPost";
 import { getCategories } from "../lib/getCategories";
 

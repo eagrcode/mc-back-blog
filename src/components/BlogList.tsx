@@ -40,7 +40,11 @@ export default function BlogList() {
         Create Post
       </Link>
       {blogPosts.map((post) => (
-        <article role="article" aria-labelledby={`post-title-${post.id}`}>
+        <article
+          key={post.id}
+          role="article"
+          aria-labelledby={`post-title-${post.id}`}
+        >
           <Link
             to={`${post.id}`}
             key={post.id}
