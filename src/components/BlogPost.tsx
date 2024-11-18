@@ -4,6 +4,7 @@ import { getBlogPostById } from "../lib/getBlogPostById";
 import { updatePrivacy } from "../lib/updatePrivacy";
 import { deleteBlogPost } from "../lib/deleteBlogPost";
 import RichTextEditor from "./Editor";
+import BackToPosts from "./BackToPosts";
 
 type Category = {
   category: string;
@@ -99,12 +100,7 @@ export default function BlogPost() {
         />
       ) : (
         <div>
-          <button
-            className="mb-2 hover:text-black/70"
-            onClick={() => navigate(-1)}
-          >
-            {"< Back to posts"}
-          </button>
+          <BackToPosts />
           <div className="relative flex flex-col w-full max-w-4xl h-fit bg-transparent border-2 border-slate-300 p-4 gap-4 rounded-md outline-none">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
