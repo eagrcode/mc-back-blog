@@ -21,17 +21,15 @@ export const getBlogPostById = async (
   id: string | undefined
 ): Promise<BlogPostProps | null> => {
   try {
-    const { data, error: dbError } = await supabase
+    const { data, error } = await supabase
       .from("posts")
       .select("*, categories(category)")
       .eq("id", id)
+      .limit(1)
       .single();
 
-    if (dbError) {
-      throw dbError;
-    }
     console.log(data);
-    return data as BlogPostProps;
+    return error ? null : (data as BlogPostProps);
   } catch (error: any) {
     throw new Error(error.message);
   }
