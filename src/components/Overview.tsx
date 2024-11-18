@@ -28,6 +28,7 @@ export default function Overview() {
     };
     const fetchLatestUpdateDate = async () => {
       const res = await getLatestUpdateDate();
+      console.log("Latest update at: ", res);
       setLatestUpdateDate(res);
     };
     fetchBlogPostsCount();
