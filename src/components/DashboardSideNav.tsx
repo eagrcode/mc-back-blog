@@ -7,7 +7,7 @@ export default function DashboardSideNav() {
     "hover:bg-slate-300 hover:text-neutral-950 text-neutral-950/70";
 
   return (
-    <nav className="sticky top-[-60px] flex flex-col w-[150px] text-base gap-4 p-4 border-r border-slate-300">
+    <nav className="sticky top-[60px] h-[calc(100dvh-60px)] flex flex-col w-[150px] text-base gap-4 p-4 border-r border-slate-300">
       <NavLink
         to={"/dashboard"}
         end

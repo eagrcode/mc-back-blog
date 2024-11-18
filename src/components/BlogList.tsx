@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getBlogPosts } from "../lib/getBlogPosts";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 type Category = {
   category: string;
@@ -31,7 +31,7 @@ export default function BlogList() {
   const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
   return (
-    <section className="flex flex-col gap-4 w-full max-w-[600px]">
+    <div className="flex flex-col gap-4 w-full max-w-[600px]">
       {blogPosts.map((post) => (
         <article role="article" aria-labelledby={`post-title-${post.id}`}>
           <Link
@@ -67,6 +67,6 @@ export default function BlogList() {
           </Link>
         </article>
       ))}
-    </section>
+    </div>
   );
 }

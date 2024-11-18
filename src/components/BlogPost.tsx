@@ -26,6 +26,7 @@ export default function BlogPost() {
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
   const [blogPost, setBlogPost] = useState<BlogPostProps | null>(null);
   const [isPublished, setIsPublished] = useState<boolean>(false);
+  const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -77,7 +78,7 @@ export default function BlogPost() {
           <button className="mb-2" onClick={() => navigate(-1)}>
             {"< Back to posts"}
           </button>
-          <div className="flex flex-col w-full max-w-4xl h-fit bg-transparent border-2 border-slate-300 p-4 gap-4 rounded-md outline-none">
+          <div className="relative flex flex-col w-full max-w-4xl h-fit bg-transparent border-2 border-slate-300 p-4 gap-4 rounded-md outline-none">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
                 <div
@@ -87,9 +88,9 @@ export default function BlogPost() {
                 ></div>
                 <p>{formatDate(blogPost?.created_at || new Date())}</p>
               </div>
-              <div className="flex gap-4">
+              <div className="relative flex gap-4">
                 <select
-                  className="bg-transparent border-2 border-slate-300 p-2 rounded-md"
+                  className="bg-transparent border-2 border-slate-300 px-2 rounded-md"
                   name="privacy"
                   id="privacy-select"
                   onChange={handleUpdatePrivacy}
@@ -103,10 +104,25 @@ export default function BlogPost() {
 
                 <button
                   onClick={() => setIsEditMode(true)}
-                  className="px-4 py-2 cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:bg-slate-400 hover:border-slate-400 font-semibold"
+                  className="px-4 py-[2px] cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:bg-slate-400 hover:border-slate-400 font-semibold"
                 >
                   Edit
                 </button>
+                <button
+                  onClick={() => setShowDeleteModal((prev) => !prev)}
+                  className="px-4 py-[2px] cursor-pointer z-10 self-start border-2 border-slate-300 rounded-md hover:border-red-700 hover:text-red-700 font-semibold"
+                >
+                  Delete
+                </button>
+                {showDeleteModal && (
+                  <div className="absolute flex flex-col gap-2 justify-center items-center p-4 bg-slate-300 border-2 border-red-700 rounded-md left-0 top-full right-0 m-auto mt-2">
+                    <p>Are you sure you want to delete?</p>
+                    <div className="flex gap-2">
+                      <button>Yes</button>
+                      <button>Cancel</button>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
             <h1 className="text-2xl">{blogPost?.title}</h1>

@@ -13,5 +13,5 @@ body {
 }
 
 main {
-  @apply py-12;
+  /* @apply py-12; */
 }
