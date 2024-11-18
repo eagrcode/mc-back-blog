@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard.tsx";
 import Overview from "./components/Overview.tsx";
 import BlogList from "./components/BlogList.tsx";
 import BlogPost from "./components/BlogPost.tsx";
+import CreateBlog from "./components/CreateBlog.tsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/blog",
         element: <BlogList />,
+      },
+      {
+        path: "/dashboard/create",
+        element: <CreateBlog />,
       },
       {
         path: "/dashboard/blog/:id",
