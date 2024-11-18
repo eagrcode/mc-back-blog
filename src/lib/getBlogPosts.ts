@@ -4,7 +4,8 @@ export const getBlogPosts = async () => {
   try {
     const { data, error: dbError } = await supabase
       .from("posts")
-      .select("*, categories(category)");
+      .select("*, categories(category)")
+      .order("created_at", { ascending: false });
 
     if (dbError) {
       throw dbError;
