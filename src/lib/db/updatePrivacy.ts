@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import { UpdatePrivacy } from "./types/types";
+import { UpdatePrivacy } from "../types/types";
 
 export const updatePrivacy = async ({
   id,

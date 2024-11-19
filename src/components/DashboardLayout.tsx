@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import DashboardSideNav from "./DashboardSideNav";
-import { supabase } from "../lib/supabaseClient";
+import { supabase } from "../lib/db/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 type Props = {

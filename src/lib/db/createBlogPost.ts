@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import { BlogPostDB, CreateBlogPost } from "./types/types";
+import { BlogPostDB, CreateBlogPost } from "../types/types";
 
 export const createBlogPost = async (
   blogPost: CreateBlogPost

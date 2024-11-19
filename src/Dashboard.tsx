@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { getUser } from "./lib/getUser";
+import { getUser } from "./lib/db/getUser";
 import { Outlet, useNavigate } from "react-router-dom";
 import DashboardLayout from "./components/DashboardLayout";
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { getBlogPostsCount } from "../lib/getBlogPostsCount";
-import { getUser } from "../lib/getUser";
-import { getLatestUpdateDate } from "../lib/getLatestUpdateDate";
+import { getBlogPostsCount } from "../lib/db/getBlogPostsCount";
+import { getUser } from "../lib/db/getUser";
+import { getLatestUpdateDate } from "../lib/db/getLatestUpdateDate";
 
 export default function Overview() {
   const [blogPostsCount, setBlogPostsCount] = useState<number>(0);

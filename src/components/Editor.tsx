@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../assets/styles/index.css";
-import { updateBlogPost } from "../lib/updateBlogPost";
-import { getCategories } from "../lib/getCategories";
+import { updateBlogPost } from "../lib/db/updateBlogPost";
+import { getCategories } from "../lib/db/getCategories";
 
 type Props = {
   id: string;

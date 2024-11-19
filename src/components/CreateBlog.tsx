@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../assets/styles/Editor.css";
-import { getCategories } from "../lib/getCategories";
-import { createBlogPost } from "../lib/createBlogPost";
+import { getCategories } from "../lib/db/getCategories";
+import { createBlogPost } from "../lib/db/createBlogPost";
 import BackToPosts from "./BackToPosts";
 import { useNavigate } from "react-router-dom";
 

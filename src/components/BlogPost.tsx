@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getBlogPostById } from "../lib/getBlogPostById";
-import { updatePrivacy } from "../lib/updatePrivacy";
-import { deleteBlogPost } from "../lib/deleteBlogPost";
+import { getBlogPostById } from "../lib/db/getBlogPostById";
+import { updatePrivacy } from "../lib/db/updatePrivacy";
+import { deleteBlogPost } from "../lib/db/deleteBlogPost";
 import RichTextEditor from "./Editor";
 import BackToPosts from "./BackToPosts";
 import { SingleBlogPost } from "../lib/types/types";

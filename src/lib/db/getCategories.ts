@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import { CategoriesDB } from "./types/types";
+import { CategoriesDB } from "../types/types";
 
 export const getCategories = async (): Promise<CategoriesDB[]> => {
   try {

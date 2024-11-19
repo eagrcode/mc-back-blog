@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getBlogPosts } from "../lib/getBlogPosts";
+import { getBlogPosts } from "../lib/db/getBlogPosts";
 import { Link } from "react-router-dom";
 
 type Category = {

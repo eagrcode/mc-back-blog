@@ -1,5 +1,5 @@
 import { supabase } from "./supabaseClient";
-import { SingleBlogPost } from "./types/types";
+import { SingleBlogPost } from "../types/types";
 
 export const getBlogPosts = async (): Promise<SingleBlogPost[]> => {
   try {
