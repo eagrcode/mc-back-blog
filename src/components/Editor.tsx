@@ -4,20 +4,7 @@ import "react-quill/dist/quill.snow.css";
 import "../assets/styles/index.css";
 import { updateBlogPost } from "../lib/db/updateBlogPost";
 import { getCategories } from "../lib/db/getCategories";
-
-type Props = {
-  id: string;
-  currentTitle: string;
-  currentSummary: string;
-  currentContent: string;
-  currentCategoryId: number;
-  setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type Categories = {
-  id: number;
-  category: string;
-};
+import { CategoriesDB, Editor } from "../lib/types/types";
 
 export default function RichTextEditor({
   id,
@@ -26,12 +13,12 @@ export default function RichTextEditor({
   currentContent,
   currentCategoryId,
   setIsEditMode,
-}: Props) {
+}: Editor) {
   const [title, setTitle] = useState<string>(currentTitle);
   const [summary, setSummary] = useState<string>(currentSummary);
   const [content, setContent] = useState<string>(currentContent);
-  const [categories, setCategories] = useState<Categories[]>([]);
   const [categoryId, setCategoryId] = useState<number>(currentCategoryId);
+  const [categories, setCategories] = useState<CategoriesDB[]>([]);
 
   useEffect(() => {
     const fetchCategories = async () => {

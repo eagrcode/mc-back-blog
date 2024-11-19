@@ -6,18 +6,7 @@ import { getCategories } from "../lib/db/getCategories";
 import { createBlogPost } from "../lib/db/createBlogPost";
 import BackToPosts from "./BackToPosts";
 import { useNavigate } from "react-router-dom";
-
-type CreateBlogPost = {
-  title: string;
-  summary: string;
-  content: string;
-  categoryId: number;
-};
-
-type Categories = {
-  id: number;
-  category: string;
-};
+import { CreateBlogPost, CategoriesDB } from "../lib/types/types";
 
 export default function CreateBlog() {
   const [blogPost, setBlogPost] = useState<CreateBlogPost>({
@@ -26,7 +15,7 @@ export default function CreateBlog() {
     content: "",
     categoryId: 0,
   });
-  const [categories, setCategories] = useState<Categories[]>([]);
+  const [categories, setCategories] = useState<CategoriesDB[]>([]);
 
   const navigate = useNavigate();
 

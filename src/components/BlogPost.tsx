@@ -6,6 +6,7 @@ import { deleteBlogPost } from "../lib/db/deleteBlogPost";
 import RichTextEditor from "./Editor";
 import BackToPosts from "./BackToPosts";
 import { SingleBlogPost } from "../lib/types/types";
+import { formatDate } from "../lib/utils/formatDate";
 
 export default function BlogPost() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -16,8 +17,6 @@ export default function BlogPost() {
 
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-
-  const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
   if (!id) {
     navigate("/dashboard/blog");

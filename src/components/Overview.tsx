@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { getBlogPostsCount } from "../lib/db/getBlogPostsCount";
 import { getUser } from "../lib/db/getUser";
 import { getLatestUpdateDate } from "../lib/db/getLatestUpdateDate";
+import { formatDate } from "../lib/utils/formatDate";
 
 export default function Overview() {
   const [blogPostsCount, setBlogPostsCount] = useState<number>(0);
@@ -34,8 +35,6 @@ export default function Overview() {
     fetchBlogPostsCount();
     fetchLatestUpdateDate();
   }, []);
-
-  const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
   if (isLoadingUser || isLoadingBlogPostsCount) {
     return (

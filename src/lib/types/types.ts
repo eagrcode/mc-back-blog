@@ -31,6 +31,7 @@ export type SingleBlogPost = {
   category_id: number;
   categories: Category;
   tags: string[] | null;
+  updated_at: Date | null;
 };
 
 export type CreateBlogPost = {
@@ -52,4 +53,15 @@ export type UpdateBlogPost = {
 export type UpdatePrivacy = {
   id: string;
   published: boolean;
+};
+
+// Component specific types
+
+export type Editor = {
+  id: string;
+  currentTitle: string;
+  currentSummary: string;
+  currentContent: string;
+  currentCategoryId: number;
+  setIsEditMode: React.Dispatch<React.SetStateAction<boolean>>;
 };

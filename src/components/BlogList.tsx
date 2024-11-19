@@ -1,25 +1,11 @@
 import { useEffect, useState } from "react";
 import { getBlogPosts } from "../lib/db/getBlogPosts";
 import { Link } from "react-router-dom";
-
-type Category = {
-  category: string;
-};
-
-type BlogListProps = {
-  id: number;
-  title: string;
-  summary: string;
-  created_at: Date;
-  image_url: string;
-  published: boolean;
-  category_id: number;
-  categories: Category;
-  updated_at: Date;
-};
+import { SingleBlogPost } from "../lib/types/types";
+import { formatDate } from "../lib/utils/formatDate";
 
 export default function BlogList() {
-  const [blogPosts, setBlogPosts] = useState<BlogListProps[]>([]);
+  const [blogPosts, setBlogPosts] = useState<SingleBlogPost[]>([]);
   const [sortOption, setSortOption] = useState<number>(0);
 
   // Fetch initial blog posts
@@ -58,8 +44,6 @@ export default function BlogList() {
   const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSortOption(parseInt(e.target.value, 10));
   };
-
-  const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
   return (
     <div className="flex flex-col gap-4 w-full max-w-[600px]">
