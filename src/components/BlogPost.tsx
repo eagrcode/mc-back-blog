@@ -5,29 +5,13 @@ import { updatePrivacy } from "../lib/updatePrivacy";
 import { deleteBlogPost } from "../lib/deleteBlogPost";
 import RichTextEditor from "./Editor";
 import BackToPosts from "./BackToPosts";
-
-type Category = {
-  category: string;
-};
-
-type BlogPostProps = {
-  id: number;
-  title: string;
-  summary: string;
-  content: string;
-  created_at: Date;
-  image_url: string;
-  published: boolean;
-  category_id: number;
-  categories: Category;
-  tags: string[];
-};
+import { SingleBlogPost } from "../lib/types/types";
 
 export default function BlogPost() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isLoadingDelete, setIsLoadingDelete] = useState<boolean>(false);
   const [isEditMode, setIsEditMode] = useState<boolean>(false);
-  const [blogPost, setBlogPost] = useState<BlogPostProps | null>(null);
+  const [blogPost, setBlogPost] = useState<SingleBlogPost | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
 
   const { id } = useParams<{ id: string }>();
@@ -35,29 +19,21 @@ export default function BlogPost() {
 
   const formatDate = (date: Date) => new Date(date).toLocaleDateString("en-GB");
 
-  let blogId = "";
-
-  if (id) {
-    blogId += id;
-  } else {
+  if (!id) {
     navigate("/dashboard/blog");
-    return;
+    return null;
   }
 
   useEffect(() => {
     const fetchBlogPost = async () => {
-      if (!id) {
+      const res = await getBlogPostById(id);
+
+      if (!res) {
         navigate("/dashboard/blog");
         return;
       }
 
-      const res = await getBlogPostById(id);
-
-      if (res == null) {
-        navigate("/dashboard/blog");
-      } else {
-        setBlogPost(res);
-      }
+      setBlogPost(res);
       setIsLoading(false);
     };
 
@@ -67,20 +43,15 @@ export default function BlogPost() {
   const handleUpdatePrivacy = async (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
-    if (!blogPost) return;
-
     const newPrivacyValue = e.target.value === "true";
-    setBlogPost({ ...blogPost, published: newPrivacyValue });
-    await updatePrivacy(id as string, newPrivacyValue);
+    setBlogPost((prev) => prev && { ...prev, published: newPrivacyValue });
+    await updatePrivacy({ id: id, published: newPrivacyValue });
   };
 
   const handleDeletePost = async () => {
     setIsLoadingDelete(true);
-    await deleteBlogPost(blogId as string);
-    setShowDeleteModal(false);
-    setBlogPost(null);
+    await deleteBlogPost(id);
     navigate("/dashboard/blog");
-    setIsLoadingDelete(false);
   };
 
   if (isLoading) {
@@ -91,7 +62,7 @@ export default function BlogPost() {
     <>
       {isEditMode ? (
         <RichTextEditor
-          id={blogId}
+          id={id}
           currentTitle={blogPost?.title || ""}
           currentSummary={blogPost?.summary || ""}
           currentContent={blogPost?.content || ""}

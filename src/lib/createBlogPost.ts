@@ -1,28 +1,9 @@
 import { supabase } from "./supabaseClient";
-
-type BlogPost = {
-  id: string;
-  title: string;
-  summary: string;
-  content: string;
-  tags: string[] | null;
-  categoryId: boolean;
-  imageUrl: string;
-  published: boolean;
-  createdAt: Date;
-  updatedAt: Date;
-};
-
-type CreateBlogPost = {
-  title: string;
-  summary: string;
-  content: string;
-  categoryId: number;
-};
+import { BlogPostDB, CreateBlogPost } from "./types/types";
 
 export const createBlogPost = async (
   blogPost: CreateBlogPost
-): Promise<BlogPost> => {
+): Promise<BlogPostDB> => {
   try {
     const { data, error: dbError } = await supabase
       .from("posts")
@@ -39,8 +20,8 @@ export const createBlogPost = async (
       throw dbError;
     }
     console.log("Successfully created blog post: ", data);
-    return data as BlogPost;
+    return data as BlogPostDB;
   } catch (error: any) {
-    throw error.message;
+    throw new Error(error.message);
   }
 };

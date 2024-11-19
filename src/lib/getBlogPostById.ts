@@ -1,25 +1,9 @@
 import { supabase } from "./supabaseClient";
-
-type Category = {
-  category: string;
-};
-
-type BlogPostProps = {
-  id: number;
-  title: string;
-  summary: string;
-  content: string;
-  created_at: Date;
-  image_url: string;
-  published: boolean;
-  category_id: number;
-  categories: Category;
-  tags: string[];
-};
+import { SingleBlogPost } from "./types/types";
 
 export const getBlogPostById = async (
   id: string | undefined
-): Promise<BlogPostProps | null> => {
+): Promise<SingleBlogPost | null> => {
   try {
     const { data, error } = await supabase
       .from("posts")
@@ -29,7 +13,7 @@ export const getBlogPostById = async (
       .single();
 
     console.log(data);
-    return error ? null : (data as BlogPostProps);
+    return error ? null : (data as SingleBlogPost);
   } catch (error: any) {
     throw new Error(error.message);
   }

@@ -1,6 +1,7 @@
 import { supabase } from "./supabaseClient";
+import { SingleBlogPost } from "./types/types";
 
-export const getBlogPosts = async () => {
+export const getBlogPosts = async (): Promise<SingleBlogPost[]> => {
   try {
     const { data, error: dbError } = await supabase
       .from("posts")
@@ -11,7 +12,7 @@ export const getBlogPosts = async () => {
       throw dbError;
     }
     console.log(data);
-    return data;
+    return data as SingleBlogPost[];
   } catch (error: any) {
     throw new Error(error.message);
   }

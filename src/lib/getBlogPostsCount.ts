@@ -1,6 +1,6 @@
 import { supabase } from "./supabaseClient";
 
-export const getBlogPostsCount = async () => {
+export const getBlogPostsCount = async (): Promise<number> => {
   try {
     const { count, error: dbError } = await supabase
       .from("posts")

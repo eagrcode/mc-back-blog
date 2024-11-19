@@ -57,7 +57,14 @@ export default function RichTextEditor({
   const handleEditSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const updatedAt = new Date().toISOString();
-    await updateBlogPost(id, title, summary, content, updatedAt, categoryId);
+    await updateBlogPost({
+      id,
+      title,
+      summary,
+      content,
+      updatedAt,
+      categoryId,
+    });
     setIsEditMode(false);
   };
 

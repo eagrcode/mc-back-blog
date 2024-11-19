@@ -1,15 +1,16 @@
 import { supabase } from "./supabaseClient";
+import { UpdateBlogPost } from "./types/types";
 
-export const updateBlogPost = async (
-  id: string,
-  title: string,
-  summary: string,
-  content: string,
-  updatedAt: string,
-  categoryId: number
-): Promise<any> => {
+export const updateBlogPost = async ({
+  id,
+  title,
+  summary,
+  content,
+  updatedAt,
+  categoryId,
+}: UpdateBlogPost): Promise<number> => {
   try {
-    const { data, error: dbError } = await supabase
+    const { data, error } = await supabase
       .from("posts")
       .update({
         title: title,
@@ -18,14 +19,15 @@ export const updateBlogPost = async (
         updated_at: updatedAt,
         category_id: categoryId,
       })
-      .eq("id", id);
+      .eq("id", id)
+      .select("*");
 
-    if (dbError) {
-      throw dbError;
+    if (error) {
+      throw error;
     }
-    console.log("Successfully updated");
-    return data;
+    console.log(`Updated ${data.length} row:`, data[0]);
+    return data.length || 0;
   } catch (error: any) {
-    throw error.message;
+    throw new Error(error);
   }
 };

@@ -1,20 +1,17 @@
 import { supabase } from "./supabaseClient";
+import { CategoriesDB } from "./types/types";
 
-type Categories = {
-  id: number;
-  category: string;
-};
-
-export const getCategories = async (): Promise<Categories[]> => {
+export const getCategories = async (): Promise<CategoriesDB[]> => {
   try {
     const { data, error } = await supabase.from("categories").select("*");
 
     if (error) {
       throw error;
     }
+
     console.log(data);
-    return data as Categories[];
+    return data as CategoriesDB[];
   } catch (error: any) {
-    throw error.message;
+    throw new Error(error.message);
   }
 };
