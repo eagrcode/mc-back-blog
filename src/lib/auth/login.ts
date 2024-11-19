@@ -1,4 +1,4 @@
-import { supabase } from "./supabaseClient";
+import { supabase } from "../db/supabaseClient";
 import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {

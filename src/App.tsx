@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLogin } from "./lib/login";
+import { useLogin } from "./lib/auth/login";
 
 export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
