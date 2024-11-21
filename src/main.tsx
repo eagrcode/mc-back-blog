@@ -9,6 +9,12 @@ import BlogList from "./components/BlogList.tsx";
 import BlogPost from "./components/BlogPost.tsx";
 import CreateBlog from "./components/CreateBlog.tsx";
 
+if (import.meta.env.MODE === "production") {
+  console.log = () => {};
+  console.warn = () => {};
+  console.error = () => {};
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
