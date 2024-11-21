@@ -39,6 +39,7 @@ export type CreateBlogPost = {
   summary: string;
   content: string;
   categoryId: number;
+  image_url: string;
 };
 
 export type UpdateBlogPost = {

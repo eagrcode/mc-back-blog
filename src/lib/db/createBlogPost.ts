@@ -12,6 +12,7 @@ export const createBlogPost = async (
         summary: blogPost.summary,
         content: blogPost.content,
         category_id: blogPost.categoryId,
+        image_url: blogPost.image_url,
       })
       .select()
       .single();
