@@ -204,36 +204,6 @@ export default function CreateBlog() {
     }
   };
 
-  // const uploadImage = async (file: File): Promise<string> => {
-  //   console.log("uploadImage: ", file);
-  //   try {
-  //     // Request a presigned URL from your backend
-  //     const { data } = await axios.post(
-  //       "http://localhost:5000/generate-presigned-url",
-  //       {
-  //         fileName: file.name,
-  //         fileType: file.type,
-  //       }
-  //     );
-
-  //     const presignedUrl = data.url;
-  //     console.log("uploadImage: ", presignedUrl);
-
-  //     // Upload the image to S3 using the presigned URL
-  //     await axios.put(presignedUrl, file, {
-  //       headers: {
-  //         "Content-Type": file.type,
-  //       },
-  //     });
-  //     console.log("presignedUrl: ", presignedUrl.split("?")[0]);
-  //     // The S3 public URL
-  //     return presignedUrl.split("?")[0];
-  //   } catch (error) {
-  //     console.error("Error uploading image:", error);
-  //     throw error;
-  //   }
-  // };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -253,7 +223,7 @@ export default function CreateBlog() {
 
       // Request a presigned URL from your backend
       const { data } = await axios.post(
-        "http://localhost:5000/generate-presigned-url",
+        import.meta.env.VITE_SERVER_URL + "/get-s3-url",
         {
           fileName: blogPost.image_url.split("amazonaws.com/")[1],
           fileType: file.type,
